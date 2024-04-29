@@ -24,7 +24,7 @@ function countStudents(path) {
                     const num = hashtable[field].length;
                     console.log(`Number of students in ${field}: ${num}. List: ${hashtable[field].join(', ')}`);
                 }
-                resolve();
+                resolve(data);
                 
         }
 
