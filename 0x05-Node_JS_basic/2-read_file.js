@@ -4,7 +4,7 @@ function countStudents(path) {
     try{
         const data = fs.readFileSync(path, 'utf-8');
         const lines = data.trim().split('\n');
-        const hashtable = {}
+        const hashtable = {};
 
         for (const line of lines) {
             const fields = line.split(',');
@@ -27,3 +27,4 @@ function countStudents(path) {
         throw new Error('Cannot load the database');
     }
 }
+module.exports = countStudents;
