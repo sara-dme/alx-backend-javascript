@@ -7,7 +7,7 @@ describe('calculate nmbers:', function() {
     });
 
     it('return substract of two numbers: -4', function() {
-        assert.strictEqual(calculateNumber('SUBSTRACT',1.4, 4.5), -4);
+        assert.strictEqual(calculateNumber('SUBTRACT',1.4, 4.5), -4);
     });
 
     it('return divide of two numbers: 0.2', function() {
