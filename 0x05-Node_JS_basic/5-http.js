@@ -1,3 +1,4 @@
+const http = require('http');
 const fs = require('fs')
 
 function countStudents(path) {
@@ -21,18 +22,35 @@ function countStudents(path) {
                 });
                 console.log(`Number of students: ${totalStudents}`);
                 for (const field in hashtable) {
-                  if (field != 'field') {
-                    const num = hashtable[field].length;
-                    console.log(`Number of students in ${field}: ${num}. List: ${hashtable[field].join(', ')}`);
+                    if (field != 'field') {
+                        const num = hashtable[field].length;
+                        console.log(`Number of students in ${field}: ${num}. List: ${hashtable[field].join(', ')}`);
+                    }
                 }
-              }
-                resolve(data);
-                
-        }
-
+                resolve(data);   
+            }
+        });
     });
-});
 }
-// Example usage:
-countStudents('database.csv')
-  .catch(error => console.error(error.message));
+
+const app = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    if (req.url === '/') {
+        res.write('Hello Holberton School!');
+        res.end();
+    }
+    if (req.url === '/students') {
+        res.write('This is the list of our students\n');
+        countStudents(process.argv[2].toString()).then((output) => {
+            const str = output.slice(0, -1);
+            res.end(str);
+        }).catch(() => {
+            res.statusCode = 404;
+            res.end('');
+        });
+    }
+});
+
+app.listen(1245);
+module.exports = app;

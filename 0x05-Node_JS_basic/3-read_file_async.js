@@ -21,8 +21,10 @@ function countStudents(path) {
                 });
                 console.log(`Number of students: ${totalStudents}`);
                 for (const field in hashtable) {
-                    const num = hashtable[field].length;
-                    console.log(`Number of students in ${field}: ${num}. List: ${hashtable[field].join(', ')}`);
+                    if (field != 'field') {
+                        const num = hashtable[field].length;
+                        console.log(`Number of students in ${field}: ${num}. List: ${hashtable[field].join(', ')}`);
+                    }
                 }
                 resolve(data);
                 
