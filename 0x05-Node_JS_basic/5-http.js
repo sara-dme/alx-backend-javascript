@@ -11,7 +11,6 @@ function countStudents(path) {
         const lines = data.trim().split('\n').filter(line => line.trim() !== '');
         const students = lines.map(line => line.split(','));
         const hashtable = {};
-        const totalStudents = students.length;
 
         students.forEach(student => {
         const field = student[3];
@@ -20,14 +19,20 @@ function countStudents(path) {
         }
         hashtable[field].push(student[0]);
         });
-        console.log(`Number of students: ${totalStudents}`);
+
+        const output = [];
+        output.push('This is the list of our students');
+
+        let totalStudents = 0;
         for (const field in hashtable) {
-          if (field != 'field') {
+          if (field !== 'field') {
             const num = hashtable[field].length;
-            console.log(`Number of students in ${field}: ${num}. List: ${hashtable[field].join(', ')}`);
+            totalStudents += num;
+            output.push(`Number of students in ${field}: ${num}. List: ${hashtable[field].join(', ')}`);
           }
         }
-        resolve(data);   
+        output.push(`Number of students: ${totalStudents}`);
+        resolve(output.join('\n'));   
       }
     });
   });
@@ -43,8 +48,7 @@ const app = http.createServer((req, res) => {
   if (req.url === '/students') {
     res.write('This is the list of our students\n');
     countStudents(process.argv[2].toString()).then((output) => {
-      const str = output.slice(0, -1);
-      res.end(str);
+      res.end(output);
     }).catch(() => {
       res.statusCode = 404;
       res.end('');
