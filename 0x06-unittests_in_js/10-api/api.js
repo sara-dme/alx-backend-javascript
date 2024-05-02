@@ -5,13 +5,11 @@ const port = 7865;
 
 app.use(express.json());
 
-app.listen(7865, () => console.log('API available on localhost port 7865 '));
-
 app.get('/', (req, res) => {
   res.send('Welcome to the payment system');
 });
 
-app.get('/cart/:id[0-9]+', (req, res) => {
+app.get('/cart/:id([0-9]+)', (req, res) => {
   res.send(`Payment methods for cart ${req.params.id}`);
 });
 
@@ -27,11 +25,11 @@ app.get('/available_payments', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  let username = '';
+  let userName = '';
   if (req.body) {
-    username = req.body.username;
+    userName = req.body.userName;
   }
-  res.send(`Welcome ${username}`);
+  res.send(`Welcome ${userName}`);
 });
 
 app.listen(port, () => {
