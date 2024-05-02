@@ -22,7 +22,6 @@ function countStudents(path) {
 
         const output = [];
         output.push('This is the list of our students');
-
         let totalStudents = 0;
         for (const field in hashtable) {
           if (field !== 'field') {
@@ -46,7 +45,6 @@ const app = http.createServer((req, res) => {
     res.end();
   }
   if (req.url === '/students') {
-    res.write('This is the list of our students\n');
     countStudents(process.argv[2].toString()).then((output) => {
       res.end(output);
     }).catch(() => {
