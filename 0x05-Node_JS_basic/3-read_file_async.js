@@ -10,9 +10,9 @@ function countStudents(path) {
         const lines = data.trim().split('\n').filter(line => line.trim() !== '');
         const students = lines.map(line => line.split(','));
         const hashtable = {};
-        const totalStudents = students.length;
+        const totalStudents = students.length - 1;
 
-        students.forEach(student => {
+        students.forEach(student => { 
           const field = student[3];
           if (!hashtable[field]) {
             hashtable[field] = [];

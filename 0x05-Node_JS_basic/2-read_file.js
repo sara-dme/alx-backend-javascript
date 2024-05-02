@@ -15,9 +15,11 @@ function countStudents(path) {
       }
       hashtable[field].push(fields[0]);
     }
-    console.log('Number of students:', lines.length - 1);
+    console.log('Number of students:', (lines.length - 1));
     for (const [field, students] of Object.entries(hashtable)) {
-      console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
+      if (field != 'field') {
+        console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
+      }
     }
   } catch (err) {
     throw new Error('Cannot load the database');
