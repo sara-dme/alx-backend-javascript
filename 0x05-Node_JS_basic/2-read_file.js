@@ -17,7 +17,7 @@ function countStudents(path) {
     }
     console.log('Number of students:', lines.length - 1);
     for (const [field, students] of Object.entries(hashtable)) {
-      console.log(`Number of students in ${field}:${students.length}. List: ${students.join(', ')}`);
+      console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
     }
   } catch (err) {
     throw new Error('Cannot load the database');
