@@ -21,8 +21,10 @@ function countStudents(path) {
         });
 
         const output = [];
+        let totalStudents = lines.length - 1;
         output.push('This is the list of our students');
-        let totalStudents = 0;
+        output.push(`Number of students: ${totalStudents}`);
+        
         for (const field in hashtable) {
           if (field !== 'field') {
             const num = hashtable[field].length;
@@ -30,7 +32,7 @@ function countStudents(path) {
             output.push(`Number of students in ${field}: ${num}. List: ${hashtable[field].join(', ')}`);
           }
         }
-        output.push(`Number of students: ${totalStudents}`);
+        
         resolve(output.join('\n'));   
       }
     });
