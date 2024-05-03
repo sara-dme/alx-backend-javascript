@@ -50,4 +50,4 @@ app.get('/students', (req, res) => {
 })
 app.listen(1245);
 
-module.exports = countStudents;
+module.exports = app;
