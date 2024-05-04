@@ -8,15 +8,14 @@ function countStudents(path) {
     fs.readFile(path, 'utf-8', (err, data) => {
       if (err) {
         reject(new Error('Cannot load the database'));
-      }
-      else {
+      } else {
         let output = '';
-        const lines = data.trim().split('\n').filter(line => line.trim() !== '');
-        const students = lines.map(line => line.split(','));
+        const lines = data.trim().split('\n').filter((line) => line.trim() !== '');
+        const students = lines.map((line) => line.split(','));
         const hashtable = {};
         const totalStudents = students.length - 1;
 
-        students.forEach(student => { 
+        students.forEach((student) => {
           const field = student[3];
           if (!hashtable[field]) {
             hashtable[field] = [];
@@ -25,7 +24,7 @@ function countStudents(path) {
         });
         output += `Number of students: ${totalStudents}\n`;
         for (const field in hashtable) {
-          if (field != 'field') {
+          if (field !== 'field') {
             const num = hashtable[field].length;
             output += `Number of students in ${field}: ${num}. List: ${hashtable[field].join(', ')}\n`;
           }
@@ -39,6 +38,7 @@ function countStudents(path) {
 app.get('/', (req, res) => {
   res.send('Hello Holberton School!');
 });
+
 app.get('/students', (req, res) => {
   countStudents(process.argv[2].toString())
     .then((data) => {
@@ -46,8 +46,9 @@ app.get('/students', (req, res) => {
     })
     .catch(() => {
       res.send('This is the list of our students\nCannot load the database');
-    })
-})
+    });
+});
+
 app.listen(1245);
 
 module.exports = app;
