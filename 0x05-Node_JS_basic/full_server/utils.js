@@ -6,21 +6,16 @@ function readDatabase(path) {
             if (err) {
                 reject(Error(err));
                 return;
-            }
-            const content = data.toString().split('\n');
-            let students = content.filter((item) => item);
-            students = students.map((item) => item.split(','));
-
-            const field = {};
-            for (const i in students) {
-                if (i != 0) {
-                    if (!field[students[i][3]]) field[students[i][3]] = [];
-                    field[students[i][3]].push(students[i][3]);
+            } else {
+                try {
+                    const database = JSON.parse(data); 
+                    resolve(database);
+                } catch (error) {
+                    reject(error);
                 }
             }
-            delete field.field
-            resolve(field);
+            
         })
     })
 }
-export default readDatabase;
+export { readDatabase};
